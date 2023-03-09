@@ -1,7 +1,9 @@
 package com.KoreaIT.java.AM;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 public class Main {
 	public static void main(String[] args) {
 		System.out.println("==프로그램 시작==");
@@ -31,27 +33,24 @@ public class Main {
 			} else if (command.equals("article write")) {
 				int id = lastArticleId + 1;
 				System.out.print("제목 : ");
+				String regDate = Util.getNowDateTimeStr();
 				String title = sc.nextLine();
 				System.out.print("내용 : ");
 				String body = sc.nextLine();
-				Article article = new Article(id, title, body);
+
+				Article article = new Article(id, regDate, title, body);
 				articles.add(article);
+
 				System.out.printf("%d번글이 생성되었습니다\n", id);
 				lastArticleId++;
-
 			} else if (command.startsWith("article detail")) {
-
 				String[] cmdDiv = command.split(" ");
-
 				if (cmdDiv.length < 3) {
 					System.out.println("명령어를 확인해주세요");
 					continue;
 				}
-
 				int id = Integer.parseInt(cmdDiv[2]);
-
 				Article foundArticle = null;
-
 				for (int i = 0; i < articles.size(); i++) {
 					Article article = articles.get(i);
 					if (article.id == id) {
@@ -59,13 +58,12 @@ public class Main {
 						break;
 					}
 				}
-
 				if (foundArticle == null) {
 					System.out.printf("%d번 게시물은 존재하지 않습니다\n", id);
 					continue;
 				}
 				System.out.println("번호 : " + foundArticle.id);
-				System.out.println("날짜 : " + "2023-12-12 12:12:12");
+				System.out.println("날짜 : " + foundArticle.regDate);
 				System.out.println("제목 : " + foundArticle.title);
 				System.out.println("내용 : " + foundArticle.body);
 
@@ -77,12 +75,16 @@ public class Main {
 		sc.close();
 	}
 }
+
 class Article {
 	int id;
+	String regDate;
 	String title;
 	String body;
-	Article(int id, String title, String body) {
+
+	Article(int id, String regDate, String title, String body) {
 		this.id = id;
+		this.regDate = regDate;
 		this.title = title;
 		this.body = body;
 	}
