@@ -22,16 +22,38 @@ public class Main {
 			if (command.equals("exit")) {
 				break;
 			}
-			if (command.equals("article list")) {
+
+			if (command.startsWith("article list")) {
 				if (articles.size() == 0) {
 					System.out.println("게시글이 없습니다");
-				} else {
-					System.out.println(" 번호  //  제목    //  조회  ");
-					for (int i = articles.size() - 1; i >= 0; i--) {
-						Article article = articles.get(i);
-						System.out.printf("  %d   //   %s   //   %d  \n", article.id, article.title, article.hit);
+					continue;
+				}
+
+				String searchKeyword = command.substring("article list".length()).trim();
+
+				List<Article> forPrintArticles = articles;
+
+				if (searchKeyword.length() > 0) {
+					System.out.println("searchKeyword : " + searchKeyword);
+					forPrintArticles = new ArrayList<>();
+
+					for (Article article : articles) {
+						if (article.title.contains(searchKeyword)) {
+							forPrintArticles.add(article);
+						}
+					}
+					if (forPrintArticles.size() == 0) {
+						System.out.println("검색 결과가 없습니다");
+						continue;
 					}
 				}
+
+				System.out.println(" 번호  //  제목    //  조회  ");
+				for (int i = forPrintArticles.size() - 1; i >= 0; i--) {
+					Article article = forPrintArticles.get(i);
+					System.out.printf("  %d   //   %s   //   %d  \n", article.id, article.title, article.hit);
+				}
+
 			} else if (command.equals("article write")) {
 				int id = lastArticleId + 1;
 				System.out.print("제목 : ");
@@ -49,11 +71,8 @@ public class Main {
 					System.out.println("명령어를 확인해주세요");
 					continue;
 				}
-
 				int id = Integer.parseInt(cmdDiv[2]);
-
 				Article foundArticle = getArticleById(id);
-
 				if (foundArticle == null) {
 					System.out.printf("%d번 게시물은 존재하지 않습니다\n", id);
 					continue;
@@ -71,11 +90,8 @@ public class Main {
 					System.out.println("명령어를 확인해주세요");
 					continue;
 				}
-
 				int id = Integer.parseInt(cmdDiv[2]);
-
 				Article foundArticle = getArticleById(id);
-
 				if (foundArticle == null) {
 					System.out.printf("%d번 게시물은 존재하지 않습니다\n", id);
 					continue;
@@ -95,11 +111,8 @@ public class Main {
 					System.out.println("명령어를 확인해주세요");
 					continue;
 				}
-
 				int id = Integer.parseInt(cmdDiv[2]);
-
 				int foundIndex = getArticleIndexById(id);
-
 				if (foundIndex == -1) {
 					System.out.printf("%d번 게시물은 존재하지 않습니다\n", id);
 					continue;
@@ -126,24 +139,11 @@ public class Main {
 	}
 
 	private static Article getArticleById(int id) {
-//		for (int i = 0; i < articles.size(); i++) {
-//			Article article = articles.get(i);
-//			if (article.id == id) {
-//				return article;
-//			}
-//		}
-
-//		for (Article article : articles) {
-//			if (article.id == id) {
-//				return article;
-//			}
-//		}
 		int index = getArticleIndexById(id);
 
 		if (index != -1) {
 			return articles.get(index);
 		}
-
 		return null;
 	}
 
