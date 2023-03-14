@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 .settings
 .classpath
 .project
 build
 bin
 src
+=======
+.classpath
+.project
+.settings
+bin
+build
+>>>>>>> a0c290866e4ed50087ed23556cc1235211535988
