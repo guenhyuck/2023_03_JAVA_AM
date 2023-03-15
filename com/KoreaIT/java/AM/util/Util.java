@@ -12,4 +12,9 @@ public class Util {
 		// 포맷팅 현재 날짜/시간 출력
 		return formatedNow;
 	}
+
+	public static String getNowDateStr() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

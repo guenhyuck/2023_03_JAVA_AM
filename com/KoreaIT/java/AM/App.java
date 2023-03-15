@@ -10,17 +10,20 @@ import com.KoreaIT.java.AM.dto.Article;
 import com.KoreaIT.java.AM.dto.Member;
 
 public class App {
-	public App() {
-	}
 
 	public void start() {
+		
 		System.out.println("==프로그램 시작==");
 		Scanner sc = new Scanner(System.in);
+		
 		MemberController memberController = new MemberController(sc);
 		ArticleController articleController = new ArticleController(sc);
+		
 		Controller controller;
+		
 		articleController.makeTestData();
 		memberController.makeTestData();
+		
 		while (true) {
 			System.out.print("명령어 > ");
 			String command = sc.nextLine().trim();
