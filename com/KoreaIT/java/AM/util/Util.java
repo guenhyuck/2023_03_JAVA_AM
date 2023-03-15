@@ -2,7 +2,6 @@ package com.KoreaIT.java.AM.util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 public class Util {
 	/** 포맷팅 현재 날짜/시간 반환 Str */
 	public static String getNowDateTimeStr() {
@@ -11,7 +10,6 @@ public class Util {
 		// 포맷팅
 		String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 		// 포맷팅 현재 날짜/시간 출력
-
 		return formatedNow;
 	}
 }
